@@ -1,3 +1,4 @@
+import { defaultLocale, getSite, hasLocale } from "@/config/i18n";
 import { emptyInquiry, validateInquiry } from "@/lib/inquiry";
 import type { Inquiry } from "@/lib/inquiry";
 
@@ -20,14 +21,15 @@ export async function POST(request: Request) {
     Object.keys(emptyInquiry).map((key) => [key, typeof body[key] === "string" ? String(body[key]).slice(0, 500) : ""]),
   ) as Inquiry;
 
-  const errors = validateInquiry(inquiry);
+  const lang = hasLocale(body.lang) ? body.lang : defaultLocale;
+  const errors = validateInquiry(inquiry, getSite(lang).contact.errors);
 
   if (Object.keys(errors).length > 0) {
     return Response.json({ errors }, { status: 422 });
   }
 
   // TODO: Anfrage an CRM / E-Mail-Postfach weiterleiten.
-  console.info("[GastroVibe] Neue Anfrage", { ...inquiry, receivedAt: new Date().toISOString() });
+  console.info("[GastroVibe] Neue Anfrage", { ...inquiry, lang, receivedAt: new Date().toISOString() });
 
   return Response.json({ ok: true }, { status: 201 });
 }

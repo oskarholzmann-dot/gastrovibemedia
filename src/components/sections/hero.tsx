@@ -5,11 +5,12 @@ import { ArrowRight, Play } from "lucide-react";
 import Image from "next/image";
 import { cn } from "cn";
 import { buttonVariants } from "@/components/ui/button";
-import { site } from "@/config/site";
+import { getSite } from "@/config/i18n";
+import type { Locale } from "@/config/i18n";
 
-export function Hero() {
+export function Hero({ lang }: { lang: Locale }) {
   const reduceMotion = useReducedMotion();
-  const { hero } = site;
+  const { hero } = getSite(lang);
   const rise = (delay: number) =>
     reduceMotion
       ? {}

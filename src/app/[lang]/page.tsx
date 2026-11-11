@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { PackageSelectionProvider } from "@/components/package-selection";
@@ -7,20 +8,27 @@ import { Packages } from "@/components/sections/packages";
 import { Portfolio } from "@/components/sections/portfolio";
 import { ProblemSolution } from "@/components/sections/problem-solution";
 import { Services } from "@/components/sections/services";
+import { hasLocale } from "@/config/i18n";
 
-export default function Home() {
+export default async function Home({ params }: PageProps<"/[lang]">) {
+  const { lang } = await params;
+
+  if (!hasLocale(lang)) {
+    notFound();
+  }
+
   return (
     <PackageSelectionProvider>
-      <Header />
+      <Header lang={lang} />
       <main>
-        <Hero />
-        <ProblemSolution />
-        <Services />
-        <Portfolio />
-        <Packages />
-        <ConversionHub />
+        <Hero lang={lang} />
+        <ProblemSolution lang={lang} />
+        <Services lang={lang} />
+        <Portfolio lang={lang} />
+        <Packages lang={lang} />
+        <ConversionHub lang={lang} />
       </main>
-      <Footer />
+      <Footer lang={lang} />
     </PackageSelectionProvider>
   );
 }

@@ -7,11 +7,13 @@ import { cn } from "cn";
 import { BeforeAfterSlider } from "@/components/before-after-slider";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
-import { site } from "@/config/site";
+import { getSite } from "@/config/i18n";
+import type { Locale } from "@/config/i18n";
 import type { Reel } from "@/config/site";
 
 /** Ein Reel im Smartphone-Rahmen (9:16). Mit Video spielt es auf Klick ab. */
-function ReelPhone({ reel }: { reel: Reel }) {
+function ReelPhone({ reel, lang }: { reel: Reel; lang: Locale }) {
+  const { ui } = getSite(lang);
   const video = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -62,7 +64,7 @@ function ReelPhone({ reel }: { reel: Reel }) {
             type="button"
             onClick={toggle}
             className="absolute inset-0 z-10 flex items-center justify-center"
-            aria-label={isPlaying ? `${reel.title} pausieren` : `${reel.title} abspielen`}
+            aria-label={`${reel.title} ${isPlaying ? ui.pause : ui.play}`}
           >
             <span className={`flex size-14 items-center justify-center rounded-full bg-cream/90 text-charcoal transition-opacity ${isPlaying ? "opacity-0 group-hover:opacity-100" : ""}`}>
               {isPlaying ? <Pause className="size-6" /> : <Play className="ml-0.5 size-6" />}
@@ -78,8 +80,8 @@ function ReelPhone({ reel }: { reel: Reel }) {
   );
 }
 
-export function Portfolio() {
-  const { portfolio } = site;
+export function Portfolio({ lang }: { lang: Locale }) {
+  const { portfolio, ui } = getSite(lang);
 
   return (
     <section id="portfolio" aria-labelledby="portfolio-title" className="scroll-mt-16 bg-charcoal py-20 sm:py-28">
@@ -91,7 +93,7 @@ export function Portfolio() {
           <div className="-mx-4 mt-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-4">
             {portfolio.reels.map((reel) => (
               <div key={reel.title} className="w-[68%] shrink-0 snap-center sm:w-auto">
-                <ReelPhone reel={reel} />
+                <ReelPhone reel={reel} lang={lang} />
               </div>
             ))}
           </div>
@@ -108,6 +110,7 @@ export function Portfolio() {
               after={portfolio.comparison.after}
               beforeLabel={portfolio.comparison.beforeLabel}
               afterLabel={portfolio.comparison.afterLabel}
+              compareLabel={ui.compare(portfolio.comparison.beforeLabel, portfolio.comparison.afterLabel)}
               sizes="(min-width: 1024px) 60vw, 100vw"
               className="aspect-[4/3] rounded-3xl border border-border"
             />

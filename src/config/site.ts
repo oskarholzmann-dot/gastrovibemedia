@@ -2,6 +2,7 @@
  * Zentrale Inhalte der GastroVibe-Media-Landingpage.
  *
  * Texte, Bilder, Videos, Preise und Kontaktdaten werden nur hier gepflegt.
+ * Englische Texte: site.en.ts (gleicher Aufbau, übernimmt Bilder und Kontaktdaten von hier).
  * Bilder liegen in /public/images; Videos (mp4) gehören nach /public/videos.
  * Externe Bild-URLs müssen zusätzlich in next.config.ts unter
  * images.remotePatterns freigegeben werden.
@@ -45,6 +46,31 @@ export const site = {
     email: "hallo@gastrovibe.media",
     phone: "+49 172 4003738",
     copyrightYear: 2026,
+  },
+
+  meta: {
+    title: "GastroVibe Media — Mehr Gäste. Ausgebuchte Tische. Starker Content.",
+    ogLocale: "de_DE",
+    /** Zahlen- und Währungsformat, z. B. für den Umsatzrechner. */
+    numberLocale: "de-DE",
+  },
+
+  /** Kleine Texte der Bedienoberfläche (Navigation, Screenreader, Hinweise). */
+  ui: {
+    toTop: "zum Seitenanfang",
+    mainNav: "Hauptnavigation",
+    mobileNav: "Mobile Navigation",
+    openMenu: "Menü öffnen",
+    closeMenu: "Menü schließen",
+    switchLanguage: "Switch to English",
+    footerNav: "Seitenbereiche",
+    footerNavTitle: "Seite",
+    rightsReserved: "Alle Rechte vorbehalten.",
+    play: "abspielen",
+    pause: "pausieren",
+    compare: (before: string, after: string) => `${before} und ${after} vergleichen`,
+    adBudgetPrefix: "+ Werbebudget",
+    noAdBudget: "Kein Werbebudget nötig",
   },
 
   /** Social-Media-Profile für den Footer. Leere URLs werden ausgeblendet. */
@@ -293,6 +319,9 @@ export const site = {
     averageSpend: { label: "Ø Umsatz pro Gast", min: 10, max: 150, step: 5, default: 35 },
     openDays: { label: "Öffnungstage pro Monat", min: 8, max: 31, step: 1, default: 26 },
     uplift: { label: "Zusätzliche Auslastung", min: 5, max: 30, step: 1, default: 10 },
+    days: "Tage",
+    resultLabel: "Möglicher Mehrumsatz pro Monat",
+    extraGuests: "zusätzliche Gäste",
   },
 
   contact: {
@@ -300,8 +329,26 @@ export const site = {
     title: "Lass uns deine Tische füllen",
     intro: "Erzähl uns kurz von deinem Betrieb. Wir melden uns innerhalb von 24 Stunden mit einem Vorschlag für ein kostenloses Erstgespräch.",
     goals: ["Tische ausbuchen", "Mehr Social Media Präsenz", "Neue Speisekarte bewerben", "Bessere Google-Bewertungen"],
+    fields: {
+      business: "Name des Betriebs / Restaurant",
+      goal: "Was ist dein aktuelles Hauptziel?",
+      package: "Wunsch-Budget / Paket",
+      email: "E-Mail",
+      phone: "Telefon",
+    },
+    errors: {
+      business: "Bitte gib den Namen deines Betriebs an.",
+      goal: "Bitte wähle dein Hauptziel.",
+      email: "Bitte gib deine E-Mail-Adresse an.",
+      emailInvalid: "Bitte gib eine gültige E-Mail-Adresse an.",
+      phone: "Bitte gib eine Telefonnummer an.",
+      phoneInvalid: "Bitte gib eine gültige Telefonnummer an.",
+    },
     packageUndecided: "Noch unklar – berät mich",
     submit: "Kostenloses Erstgespräch vereinbaren",
+    sending: "Wird gesendet …",
+    failed: "Etwas ist schiefgelaufen. Bitte versuche es erneut oder schreib uns an",
+    sendAnother: "Weitere Anfrage senden",
     privacy: "Wir nutzen deine Angaben nur, um dich zu deiner Anfrage zu kontaktieren.",
     success: {
       title: "Danke! Deine Anfrage ist da.",
@@ -313,5 +360,7 @@ export const site = {
     tagline: "Social Media & Performance Marketing für Gastronomie, Hotellerie & Event-Locations.",
   },
 };
+
+export type SiteContent = typeof site;
 
 export type SectionId = (typeof site.nav)[number]["id"];

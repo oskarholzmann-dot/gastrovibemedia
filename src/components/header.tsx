@@ -5,11 +5,15 @@ import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "cn";
 import { buttonVariants } from "@/components/ui/button";
-import { site } from "@/config/site";
+import { getSite } from "@/config/i18n";
+import type { Locale } from "@/config/i18n";
+import { LanguageSwitch } from "./language-switch";
 
-export function Logo() {
+export function Logo({ lang }: { lang: Locale }) {
+  const site = getSite(lang);
+
   return (
-    <a href="#top" className="flex items-baseline gap-1.5 text-cream" aria-label={`${site.brand.name} – zum Seitenanfang`}>
+    <a href="#top" className="flex items-baseline gap-1.5 text-cream" aria-label={`${site.brand.name} – ${site.ui.toTop}`}>
       <span className="font-heading text-xl font-semibold sm:text-2xl">
         Gastro<span className="text-amber-gold">Vibe</span>
       </span>
@@ -18,7 +22,8 @@ export function Logo() {
   );
 }
 
-export function Header() {
+export function Header({ lang }: { lang: Locale }) {
+  const site = getSite(lang);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -37,23 +42,24 @@ export function Header() {
         isScrolled || isMenuOpen ? "border-b border-border bg-charcoal/90 backdrop-blur-xl" : "bg-transparent",
       )}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center gap-6 px-4 sm:h-18 sm:px-6">
-        <Logo />
-        <nav aria-label="Hauptnavigation" className="ml-auto hidden items-center gap-7 lg:flex">
+      <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:h-18 lg:gap-6 sm:px-6">
+        <Logo lang={lang} />
+        <nav aria-label={site.ui.mainNav} className="ml-auto hidden items-center gap-7 lg:flex">
           {site.nav.map((item) => (
             <a key={item.id} href={`#${item.id}`} className="text-sm font-medium text-cream-muted/80 transition-colors hover:text-cream">
               {item.label}
             </a>
           ))}
         </nav>
-        <a href="#anfrage" className={cn(buttonVariants(), "ml-auto hidden h-10 rounded-full px-5 font-semibold sm:inline-flex lg:ml-0")}>
+        <LanguageSwitch lang={lang} className="ml-auto lg:ml-0" />
+        <a href="#anfrage" className={cn(buttonVariants(), "hidden h-10 rounded-full px-5 font-semibold sm:inline-flex")}>
           {site.hero.primaryCta}
         </a>
         <button
           type="button"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="ml-auto flex size-10 items-center justify-center rounded-full border border-border text-cream sm:ml-0 lg:hidden"
-          aria-label={isMenuOpen ? "Menü schließen" : "Menü öffnen"}
+          className="flex size-10 items-center justify-center rounded-full border border-border text-cream lg:hidden"
+          aria-label={isMenuOpen ? site.ui.closeMenu : site.ui.openMenu}
           aria-expanded={isMenuOpen}
         >
           {isMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -63,7 +69,7 @@ export function Header() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.nav
-            aria-label="Mobile Navigation"
+            aria-label={site.ui.mobileNav}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}

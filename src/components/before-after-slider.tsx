@@ -19,6 +19,7 @@ export function BeforeAfterSlider({
   after,
   beforeLabel,
   afterLabel,
+  compareLabel,
   sizes = "100vw",
   className,
 }: {
@@ -26,6 +27,8 @@ export function BeforeAfterSlider({
   after: Media;
   beforeLabel: string;
   afterLabel: string;
+  /** Screenreader-Beschriftung des Reglers. */
+  compareLabel: string;
   sizes?: string;
   className?: string;
 }) {
@@ -89,7 +92,7 @@ export function BeforeAfterSlider({
       <div
         role="slider"
         tabIndex={0}
-        aria-label={`${beforeLabel} und ${afterLabel} vergleichen`}
+        aria-label={compareLabel}
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={Math.round(position)}

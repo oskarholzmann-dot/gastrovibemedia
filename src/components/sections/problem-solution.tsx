@@ -2,11 +2,12 @@ import { Check, X } from "lucide-react";
 import Image from "next/image";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
-import { site } from "@/config/site";
+import { getSite } from "@/config/i18n";
+import type { Locale } from "@/config/i18n";
 import type { Media } from "@/config/site";
 
-export function ProblemSolution() {
-  const { problem } = site;
+export function ProblemSolution({ lang }: { lang: Locale }) {
+  const { problem } = getSite(lang);
 
   return (
     <section id="warum" aria-labelledby="warum-title" className="scroll-mt-16 bg-charcoal py-20 sm:py-28">

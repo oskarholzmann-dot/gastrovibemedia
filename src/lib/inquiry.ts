@@ -13,32 +13,42 @@ export type Inquiry = {
 
 export type InquiryErrors = Partial<Record<keyof Inquiry, string>>;
 
+/** Fehlertexte in der Sprache der Seite, siehe contact.errors in der Site-Konfiguration. */
+export type InquiryErrorMessages = {
+  business: string;
+  goal: string;
+  email: string;
+  emailInvalid: string;
+  phone: string;
+  phoneInvalid: string;
+};
+
 export const emptyInquiry: Inquiry = { business: "", goal: "", package: "", email: "", phone: "" };
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const PHONE = /^[+()\d\s/-]{6,}$/;
 
-export function validateInquiry(inquiry: Inquiry): InquiryErrors {
+export function validateInquiry(inquiry: Inquiry, messages: InquiryErrorMessages): InquiryErrors {
   const errors: InquiryErrors = {};
 
   if (inquiry.business.trim() === "") {
-    errors.business = "Bitte gib den Namen deines Betriebs an.";
+    errors.business = messages.business;
   }
 
   if (inquiry.goal.trim() === "") {
-    errors.goal = "Bitte wähle dein Hauptziel.";
+    errors.goal = messages.goal;
   }
 
   if (inquiry.email.trim() === "") {
-    errors.email = "Bitte gib deine E-Mail-Adresse an.";
+    errors.email = messages.email;
   } else if (!EMAIL.test(inquiry.email.trim())) {
-    errors.email = "Bitte gib eine gültige E-Mail-Adresse an.";
+    errors.email = messages.emailInvalid;
   }
 
   if (inquiry.phone.trim() === "") {
-    errors.phone = "Bitte gib eine Telefonnummer an.";
+    errors.phone = messages.phone;
   } else if (!PHONE.test(inquiry.phone.trim())) {
-    errors.phone = "Bitte gib eine gültige Telefonnummer an.";
+    errors.phone = messages.phoneInvalid;
   }
 
   return errors;

@@ -10,10 +10,11 @@ import { SectionHeading } from "@/components/section-heading";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { site } from "@/config/site";
+import { getSite } from "@/config/i18n";
+import type { Locale } from "@/config/i18n";
 
-export function Packages() {
-  const { packages } = site;
+export function Packages({ lang }: { lang: Locale }) {
+  const { packages, ui } = getSite(lang);
   const { selectedPackage, selectPackage } = usePackageSelection();
   const [showAdBudget, setShowAdBudget] = useState(false);
   const switchId = useId();
@@ -89,7 +90,7 @@ export function Packages() {
                       >
                         <span className="mt-3 flex items-center gap-2 rounded-xl bg-white/5 px-3 py-2 text-sm text-cream-muted">
                           <Megaphone className="size-4 shrink-0 text-amber-gold" aria-hidden="true" />
-                          {tier.adBudget ? `+ Werbebudget ${tier.adBudget}` : "Kein Werbebudget nötig"}
+                          {tier.adBudget ? `${ui.adBudgetPrefix} ${tier.adBudget}` : ui.noAdBudget}
                         </span>
                       </motion.p>
                     )}

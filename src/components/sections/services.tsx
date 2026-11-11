@@ -6,7 +6,8 @@ import { motion } from "motion/react";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { Card } from "@/components/ui/card";
-import { site } from "@/config/site";
+import { getSite } from "@/config/i18n";
+import type { Locale } from "@/config/i18n";
 
 const icons: Record<string, LucideIcon> = {
   camera: Camera,
@@ -15,8 +16,8 @@ const icons: Record<string, LucideIcon> = {
   monitor: MonitorSmartphone,
 };
 
-export function Services() {
-  const { services } = site;
+export function Services({ lang }: { lang: Locale }) {
+  const { services } = getSite(lang);
 
   return (
     <section id="leistungen" aria-labelledby="leistungen-title" className="scroll-mt-16 bg-slate-warm py-20 sm:py-28">

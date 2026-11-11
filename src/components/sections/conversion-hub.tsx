@@ -13,11 +13,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
-import { site } from "@/config/site";
+import { getSite } from "@/config/i18n";
+import type { Locale } from "@/config/i18n";
 import { emptyInquiry, validateInquiry } from "@/lib/inquiry";
 import type { Inquiry, InquiryErrors } from "@/lib/inquiry";
-
-const euro = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
 
 type SliderSetting = { label: string; min: number; max: number; step: number; default: number };
 
@@ -41,8 +40,9 @@ function CalculatorSlider({ setting, value, onChange, format }: { setting: Slide
   );
 }
 
-function Calculator() {
-  const { calculator } = site;
+function Calculator({ lang }: { lang: Locale }) {
+  const { calculator, meta } = getSite(lang);
+  const euro = new Intl.NumberFormat(meta.numberLocale, { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
   const [seats, setSeats] = useState(calculator.seats.default);
   const [averageSpend, setAverageSpend] = useState(calculator.averageSpend.default);
   const [openDays, setOpenDays] = useState(calculator.openDays.default);
@@ -66,14 +66,14 @@ function Calculator() {
       <div className="mt-8 space-y-7">
         <CalculatorSlider setting={calculator.seats} value={seats} onChange={setSeats} format={(value) => `${value}`} />
         <CalculatorSlider setting={calculator.averageSpend} value={averageSpend} onChange={setAverageSpend} format={euro.format} />
-        <CalculatorSlider setting={calculator.openDays} value={openDays} onChange={setOpenDays} format={(value) => `${value} Tage`} />
+        <CalculatorSlider setting={calculator.openDays} value={openDays} onChange={setOpenDays} format={(value) => `${value} ${calculator.days}`} />
         <CalculatorSlider setting={calculator.uplift} value={uplift} onChange={setUplift} format={(value) => `+${value} %`} />
       </div>
 
       <div className="mt-8 rounded-2xl bg-gradient-to-br from-amber-gold to-copper p-6 text-charcoal" aria-live="polite">
-        <p className="text-sm font-medium opacity-80">Möglicher Mehrumsatz pro Monat</p>
+        <p className="text-sm font-medium opacity-80">{calculator.resultLabel}</p>
         <p className="mt-1 font-heading text-4xl font-bold tabular-nums">{euro.format(extraRevenue)}</p>
-        <p className="mt-1 text-sm opacity-80">≈ {extraGuests.toLocaleString("de-DE")} zusätzliche Gäste</p>
+        <p className="mt-1 text-sm opacity-80">≈ {extraGuests.toLocaleString(meta.numberLocale)} {calculator.extraGuests}</p>
       </div>
       <p className="mt-3 text-xs text-cream-muted/50">{calculator.disclaimer}</p>
     </div>
@@ -96,7 +96,8 @@ function Field({ id, label, error, children }: { id: string; label: string; erro
   );
 }
 
-function InquiryForm() {
+function InquiryForm({ lang }: { lang: Locale }) {
+  const site = getSite(lang);
   const { contact, packages } = site;
   const { selectedPackage, selectPackage } = usePackageSelection();
   const [inquiry, setInquiry] = useState<Inquiry>(emptyInquiry);
@@ -121,7 +122,7 @@ function InquiryForm() {
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
-    const validation = validateInquiry(form);
+    const validation = validateInquiry(form, contact.errors);
 
     if (Object.keys(validation).length > 0) {
       setErrors(validation);
@@ -136,7 +137,7 @@ function InquiryForm() {
       const response = await fetch("/api/anfrage", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, lang }),
       });
 
       if (response.status === 422) {
@@ -171,12 +172,12 @@ function InquiryForm() {
                 setStatus("idle");
               }}
             >
-              Weitere Anfrage senden
+              {contact.sendAnother}
             </Button>
           </motion.div>
         ) : (
           <motion.form key="form" onSubmit={submit} noValidate exit={{ opacity: 0 }} className="grid gap-6">
-            <Field id="inquiry-business" label="Name des Betriebs / Restaurant" error={errors.business}>
+            <Field id="inquiry-business" label={contact.fields.business} error={errors.business}>
               <Input
                 id="inquiry-business"
                 value={form.business}
@@ -189,7 +190,7 @@ function InquiryForm() {
             </Field>
 
             <fieldset className="grid gap-3">
-              <legend className="mb-1 text-sm font-medium text-cream-muted">Was ist dein aktuelles Hauptziel?</legend>
+              <legend className="mb-1 text-sm font-medium text-cream-muted">{contact.fields.goal}</legend>
               <div id="inquiry-goal" tabIndex={-1} className="grid grid-cols-1 gap-2 outline-none sm:grid-cols-2">
                 {contact.goals.map((goal) => (
                   <label
@@ -207,7 +208,7 @@ function InquiryForm() {
               {errors.goal && <p className="text-sm text-destructive">{errors.goal}</p>}
             </fieldset>
 
-            <Field id="inquiry-package" label="Wunsch-Budget / Paket">
+            <Field id="inquiry-package" label={contact.fields.package}>
               <Select items={packageItems} value={form.package} onValueChange={(value) => update("package", value ?? "")}>
                 <SelectTrigger id="inquiry-package" className={cn(inputClass, "w-full data-[size=default]:h-12")}>
                   <SelectValue />
@@ -223,7 +224,7 @@ function InquiryForm() {
             </Field>
 
             <div className="grid gap-6 sm:grid-cols-2">
-              <Field id="inquiry-email" label="E-Mail" error={errors.email}>
+              <Field id="inquiry-email" label={contact.fields.email} error={errors.email}>
                 <Input
                   id="inquiry-email"
                   type="email"
@@ -235,7 +236,7 @@ function InquiryForm() {
                   className={inputClass}
                 />
               </Field>
-              <Field id="inquiry-phone" label="Telefon" error={errors.phone}>
+              <Field id="inquiry-phone" label={contact.fields.phone} error={errors.phone}>
                 <Input
                   id="inquiry-phone"
                   type="tel"
@@ -251,7 +252,7 @@ function InquiryForm() {
 
             {status === "failed" && (
               <p role="alert" className="rounded-xl bg-destructive/10 px-4 py-3 text-sm text-destructive">
-                Etwas ist schiefgelaufen. Bitte versuche es erneut oder schreib uns an{" "}
+                {contact.failed}{" "}
                 <a className="underline" href={`mailto:${site.brand.email}`}>
                   {site.brand.email}
                 </a>
@@ -261,7 +262,7 @@ function InquiryForm() {
 
             <Button type="submit" disabled={status === "sending"} className="h-14 rounded-full text-base font-semibold">
               {status === "sending" ? <LoaderCircle className="animate-spin" aria-hidden="true" /> : <CalendarCheck aria-hidden="true" />}
-              {status === "sending" ? "Wird gesendet …" : contact.submit}
+              {status === "sending" ? contact.sending : contact.submit}
             </Button>
             <p className="-mt-2 text-center text-xs text-cream-muted/50">{contact.privacy}</p>
           </motion.form>
@@ -271,8 +272,8 @@ function InquiryForm() {
   );
 }
 
-export function ConversionHub() {
-  const { contact } = site;
+export function ConversionHub({ lang }: { lang: Locale }) {
+  const { contact } = getSite(lang);
 
   return (
     <section id="anfrage" aria-labelledby="anfrage-title" className="scroll-mt-16 bg-charcoal py-20 sm:py-28">
@@ -280,10 +281,10 @@ export function ConversionHub() {
         <SectionHeading eyebrow={contact.eyebrow} title={contact.title} intro={contact.intro} />
         <div className="mt-12 grid gap-5 lg:grid-cols-[1fr_1.25fr]">
           <Reveal className="order-2 min-w-0 lg:order-1">
-            <Calculator />
+            <Calculator lang={lang} />
           </Reveal>
           <Reveal delay={0.1} className="order-1 min-w-0 lg:order-2">
-            <InquiryForm />
+            <InquiryForm lang={lang} />
           </Reveal>
         </div>
       </div>
