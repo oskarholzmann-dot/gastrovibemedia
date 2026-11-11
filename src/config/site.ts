@@ -43,7 +43,7 @@ export const site = {
   brand: {
     name: "GastroVibe Media",
     email: "hallo@gastrovibe.media",
-    phone: "+49 30 000 000 00",
+    phone: "+49 172 4003738",
     copyrightYear: 2026,
   },
 
