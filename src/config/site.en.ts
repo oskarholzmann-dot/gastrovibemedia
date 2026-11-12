@@ -58,7 +58,7 @@ export const siteEn: SiteContent = {
     primaryCta: "Request a quote",
     secondaryCta: "See our work",
     video: de.hero.video,
-    image: { ...de.hero.image, alt: "Many hands holding colourful bowls together over a table, photographed from above" },
+    image: { ...de.hero.image, alt: "Two hands holding an açaí bowl over a table full of colourful poke bowls and smoothies" },
     stats: [
       { value: "Reels", label: "that make people hungry" },
       { value: "5★", label: "Google reviews, built up" },
@@ -83,7 +83,7 @@ export const siteEn: SiteContent = {
     },
     after: {
       label: "With GastroVibe Media",
-      image: { ...de.problem.after.image, alt: "A smiling guest enjoying oysters by candlelight in a restaurant" },
+      image: { ...de.problem.after.image, alt: "A smiling woman holding two freshly prepared poke bowls towards the camera" },
       points: [
         "Professional content that whets the appetite",
         "Automated table bookings straight from social & Google",
@@ -160,12 +160,14 @@ export const siteEn: SiteContent = {
     },
     gridTitle: "Food, mood & location photography",
     grid: [
-      "Fish fillet on vegetable rice, served on a wooden table",
+      "Fresh oysters on ice with lemon and vinaigrette, photographed from above",
+      "A woman biting into a beetroot ball from her bowl with chopsticks",
       "A creamy dish with pomegranate and nuts",
+      "Hands holding an açaí bowl over a table with colourful bowls and smoothies",
+      "A woman biting into a glazed sesame skewer above her bowl",
       "Two hands toasting with salad bowls in front of a summery cornfield",
+      "A woman holding up a poke bowl in a restaurant in the evening",
       "A generously laid breakfast table with bowls, toasts and cappuccino from above",
-      "A mushroom dish in a spinning shot with warm light trails",
-      "Ice cream sundaes with cream and toppings on a wooden table",
     ].map((alt, index) => ({ ...de.portfolio.grid[index], alt })),
   },
 

@@ -7,7 +7,7 @@
  * Externe Bild-URLs müssen zusätzlich in next.config.ts unter
  * images.remotePatterns freigegeben werden.
  *
- * Food-Fotos: eigene Produktionen (oskarholly.com). Nur das leere Restaurant
+ * Food-Fotos: eigene Produktionen. Nur das leere Restaurant
  * im Vorher/Nachher ist noch ein Unsplash-Platzhalter (https://unsplash.com/license).
  */
 
@@ -104,8 +104,8 @@ export const site = {
     /** Hintergrund-Loop (mp4, ohne Ton). Leer = das Bild wird mit sanftem Zoom gezeigt. */
     video: "",
     image: {
-      src: "/images/hero-bowls-hands.jpg",
-      alt: "Viele Hände halten bunte Bowls über einem Tisch zusammen, von oben fotografiert",
+      src: "/images/hero-bowls-table.jpg",
+      alt: "Zwei Hände halten eine Açaí-Bowl über einen Tisch voller bunter Poke-Bowls und Smoothies",
     } satisfies Media,
     stats: [
       { value: "Reels", label: "die Hunger machen" },
@@ -136,8 +136,8 @@ export const site = {
     after: {
       label: "Mit GastroVibe Media",
       image: {
-        src: "/images/guest-dinner.jpg",
-        alt: "Ein lächelnder Gast genießt Austern bei Kerzenlicht im Restaurant",
+        src: "/images/guest-bowls.jpg",
+        alt: "Eine lächelnde Frau hält zwei frisch angerichtete Poke-Bowls in die Kamera",
       } satisfies Media,
       points: [
         "Professioneller Content, der Appetit macht",
@@ -248,12 +248,14 @@ export const site = {
     },
     gridTitle: "Food-, Mood- & Location-Fotografie",
     grid: [
-      { src: "/images/grid-fish.jpg", alt: "Fischfilet auf Gemüsereis, angerichtet auf einem Holztisch" },
+      { src: "/images/grid-oysters.jpg", alt: "Frische Austern auf Eis mit Zitrone und Vinaigrette, von oben fotografiert" },
+      { src: "/images/grid-bite-bowl.jpg", alt: "Eine Frau beißt mit Stäbchen in ein Rote-Bete-Bällchen aus ihrer Bowl" },
       { src: "/images/grid-dish.jpg", alt: "Ein cremiges Gericht mit Granatapfel und Nüssen" },
+      { src: "/images/grid-bowls-top.jpg", alt: "Hände halten eine Açaí-Bowl über einen Tisch mit bunten Bowls und Smoothies" },
+      { src: "/images/grid-bite-skewer.jpg", alt: "Eine Frau beißt in einen glasierten Spieß mit Sesam über ihrer Bowl" },
       { src: "/images/grid-festival.jpg", alt: "Zwei Hände stoßen mit Salat-Bowls an, im Hintergrund ein sommerliches Kornfeld" },
+      { src: "/images/grid-bowl-night.jpg", alt: "Eine Frau hält abends im Restaurant eine Poke-Bowl in die Kamera" },
       { src: "/images/grid-table.jpg", alt: "Ein reich gedeckter Frühstückstisch mit Bowls, Toasts und Cappuccino von oben" },
-      { src: "/images/grid-motion.jpg", alt: "Ein Gericht mit Pilzen in einer Dreh-Aufnahme mit warmen Lichtspuren" },
-      { src: "/images/grid-sundaes.jpg", alt: "Eisbecher mit Sahne und Toppings auf einem Holztisch" },
     ] satisfies Media[],
   },
 

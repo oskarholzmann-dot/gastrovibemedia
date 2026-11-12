@@ -3,7 +3,6 @@
 import { Heart, MessageCircle, Pause, Play } from "lucide-react";
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { cn } from "cn";
 import { BeforeAfterSlider } from "@/components/before-after-slider";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
@@ -119,21 +118,14 @@ export function Portfolio({ lang }: { lang: Locale }) {
 
         <Reveal className="mt-20">
           <h3 className="text-xl font-semibold text-cream">{portfolio.gridTitle}</h3>
-          <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
-            {portfolio.grid.map((photo, index) => (
-              <li
-                key={photo.src}
-                className={cn(
-                  "group relative aspect-square overflow-hidden rounded-2xl",
-                  index === 0 && "col-span-2 aspect-[4/3] sm:row-span-2 sm:aspect-auto",
-                  index === portfolio.grid.length - 1 && "hidden sm:block",
-                )}
-              >
+          <ul className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {portfolio.grid.map((photo) => (
+              <li key={photo.src} className="group relative aspect-[4/5] overflow-hidden rounded-2xl">
                 <Image
                   src={photo.src}
                   alt={photo.alt}
                   fill
-                  sizes="(min-width: 1024px) 33vw, 50vw"
+                  sizes="(min-width: 1024px) 25vw, 50vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </li>
