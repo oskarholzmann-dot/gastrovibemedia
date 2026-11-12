@@ -38,7 +38,7 @@ function ReelPhone({ reel, lang }: { reel: Reel; lang: Locale }) {
       <div className="relative aspect-[9/16] overflow-hidden rounded-[2.2rem] border-[6px] border-zinc-800 bg-black shadow-[0_30px_60px_-20px_rgba(0,0,0,0.8)] ring-1 ring-white/10">
         <div className="absolute top-2 left-1/2 z-20 h-5 w-20 -translate-x-1/2 rounded-full bg-black" />
         {reel.video ? (
-          <video ref={video} src={reel.video} poster={reel.poster.src} muted loop playsInline className="size-full object-cover" />
+          <video ref={video} src={reel.video} poster={reel.poster.src} preload="none" muted loop playsInline className="size-full object-cover" />
         ) : (
           <Image
             src={reel.poster.src}

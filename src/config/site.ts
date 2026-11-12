@@ -7,8 +7,8 @@
  * Externe Bild-URLs müssen zusätzlich in next.config.ts unter
  * images.remotePatterns freigegeben werden.
  *
- * Platzhalter-Fotos: Unsplash (https://unsplash.com/license), kostenlos auch
- * für kommerzielle Nutzung. Durch eigene Produktionen ersetzen.
+ * Food-Fotos: eigene Produktionen (oskarholly.com). Nur das leere Restaurant
+ * im Vorher/Nachher ist noch ein Unsplash-Platzhalter (https://unsplash.com/license).
  */
 
 export type Media = {
@@ -104,8 +104,8 @@ export const site = {
     /** Hintergrund-Loop (mp4, ohne Ton). Leer = das Bild wird mit sanftem Zoom gezeigt. */
     video: "",
     image: {
-      src: "/images/hero-dinner.jpg",
-      alt: "Gäste an einem festlich gedeckten Tisch bei Kerzenlicht",
+      src: "/images/hero-bowls-hands.jpg",
+      alt: "Viele Hände halten bunte Bowls über einem Tisch zusammen, von oben fotografiert",
     } satisfies Media,
     stats: [
       { value: "Reels", label: "die Hunger machen" },
@@ -136,8 +136,8 @@ export const site = {
     after: {
       label: "Mit GastroVibe Media",
       image: {
-        src: "/images/full-restaurant.jpg",
-        alt: "Ein volles Restaurant mit Gästen, die gemeinsam essen und lachen",
+        src: "/images/guest-dinner.jpg",
+        alt: "Ein lächelnder Gast genießt Austern bei Kerzenlicht im Restaurant",
       } satisfies Media,
       points: [
         "Professioneller Content, der Appetit macht",
@@ -201,28 +201,28 @@ export const site = {
     reelsTitle: "Reels & TikToks",
     reels: [
       {
-        title: "Chef’s Plating",
-        category: "Küche",
-        poster: { src: "/images/reel-chef.jpg", alt: "Ein Koch richtet einen Teller unter warmem Licht an" },
-        video: "",
+        title: "Opening Night",
+        category: "Event",
+        poster: { src: "/images/reel-opening.jpg", alt: "Eine Crêpe wird auf der heißen Platte mit Schoko-Aufstrich bestrichen" },
+        video: "/videos/reel-opening.mp4",
       },
       {
-        title: "Signature Drink",
-        category: "Bar-Special",
-        poster: { src: "/images/reel-cocktail.jpg", alt: "Ein Cocktail wird über Eis eingeschenkt" },
-        video: "",
-      },
-      {
-        title: "Pizza Night",
+        title: "Pizza Sunday",
         category: "Food",
-        poster: { src: "/images/reel-pizza.jpg", alt: "Eine frisch gebackene Pizza auf einem Holzbrett" },
-        video: "",
+        poster: { src: "/images/reel-pizza.jpg", alt: "Frisch gebackene Pizza wird bei einem Event mit Käse bestreut" },
+        video: "/videos/reel-pizza.mp4",
       },
       {
-        title: "Neue Karte",
-        category: "Speisekarte",
-        poster: { src: "/images/reel-salmon.jpg", alt: "Ein angerichtetes Lachsgericht" },
-        video: "",
+        title: "Pasta Carbonara",
+        category: "Küche",
+        poster: { src: "/images/reel-carbonara.jpg", alt: "Frische Tagliatelle Carbonara werden mit der Zange aus der Pfanne gehoben" },
+        video: "/videos/reel-carbonara.mp4",
+      },
+      {
+        title: "Sweet Jar",
+        category: "Dessert",
+        poster: { src: "/images/reel-dessert.jpg", alt: "Ein Dessert im Glas mit Kirschen und Streuseln" },
+        video: "/videos/reel-dessert.mp4",
       },
     ] satisfies Reel[],
     comparison: {
@@ -236,24 +236,24 @@ export const site = {
        * und filter/transform entfernen.
        */
       before: {
-        src: "/images/burger.jpg",
-        alt: "Ein Burger, flau und gelbstichig mit dem Handy fotografiert",
+        src: "/images/pizza.jpg",
+        alt: "Eine Pizza, flau und gelbstichig mit dem Handy fotografiert",
         filter: "saturate(0.55) contrast(0.78) brightness(0.78) sepia(0.4) blur(0.8px)",
         transform: "scale(1.18) rotate(-3deg) translate(3%, 4%)",
       } satisfies Media,
       after: {
-        src: "/images/burger.jpg",
-        alt: "Derselbe Burger, professionell ausgeleuchtet und fotografiert",
+        src: "/images/pizza.jpg",
+        alt: "Dieselbe Pizza, professionell ausgeleuchtet und fotografiert",
       } satisfies Media,
     },
     gridTitle: "Food-, Mood- & Location-Fotografie",
     grid: [
-      { src: "/images/grid-steak.jpg", alt: "Steak mit Pommes auf einem Teller" },
-      { src: "/images/grid-bar.jpg", alt: "Eine stimmungsvoll beleuchtete Bar" },
-      { src: "/images/grid-bowls.jpg", alt: "Verschiedene Gerichte von oben fotografiert" },
-      { src: "/images/grid-terrace.jpg", alt: "Eine Restaurant-Terrasse am Wasser" },
-      { src: "/images/grid-breakfast.jpg", alt: "Gäste beim Frühstück, von oben fotografiert" },
-      { src: "/images/grid-garden.jpg", alt: "Ein begrüntes Restaurant mit Holztischen" },
+      { src: "/images/grid-fish.jpg", alt: "Fischfilet auf Gemüsereis, angerichtet auf einem Holztisch" },
+      { src: "/images/grid-dish.jpg", alt: "Ein cremiges Gericht mit Granatapfel und Nüssen" },
+      { src: "/images/grid-festival.jpg", alt: "Zwei Hände stoßen mit Salat-Bowls an, im Hintergrund ein sommerliches Kornfeld" },
+      { src: "/images/grid-table.jpg", alt: "Ein reich gedeckter Frühstückstisch mit Bowls, Toasts und Cappuccino von oben" },
+      { src: "/images/grid-motion.jpg", alt: "Ein Gericht mit Pilzen in einer Dreh-Aufnahme mit warmen Lichtspuren" },
+      { src: "/images/grid-sundaes.jpg", alt: "Eisbecher mit Sahne und Toppings auf einem Holztisch" },
     ] satisfies Media[],
   },
 
