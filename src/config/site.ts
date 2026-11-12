@@ -231,14 +231,14 @@ export const site = {
       beforeLabel: "Handyfoto",
       afterLabel: "Food-Shooting",
       /**
-       * Platzhalter: Das „Handyfoto“ wird per Filter aus dem Profi-Foto simuliert.
+       * Platzhalter: Das „Handyfoto“ ist eine entsättigte, leicht verpixelte Kopie des Profi-Fotos.
        * Für echte Vergleiche ein eigenes Handyfoto desselben Gerichts eintragen
        * und filter/transform entfernen.
        */
       before: {
-        src: "/images/pizza.jpg",
+        src: "/images/pizza-handyfoto.jpg",
         alt: "Eine Pizza, flau und gelbstichig mit dem Handy fotografiert",
-        filter: "saturate(0.55) contrast(0.78) brightness(0.78) sepia(0.4) blur(0.8px)",
+        filter: "brightness(0.9) sepia(0.15)",
         transform: "scale(1.18) rotate(-3deg) translate(3%, 4%)",
       } satisfies Media,
       after: {
