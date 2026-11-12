@@ -1,4 +1,4 @@
-import { getSite } from "@/config/i18n";
+import { getSite, pagePath, sectionPath } from "@/config/i18n";
 import type { Locale } from "@/config/i18n";
 import { Logo } from "./header";
 
@@ -26,11 +26,16 @@ export function Footer({ lang }: { lang: Locale }) {
           <ul className="mt-4 space-y-2 text-sm">
             {site.nav.map((item) => (
               <li key={item.id}>
-                <a href={`#${item.id}`} className="text-cream-muted/80 hover:text-cream">
+                <a href={sectionPath(lang, item.id)} className="text-cream-muted/80 hover:text-cream">
                   {item.label}
                 </a>
               </li>
             ))}
+            <li>
+              <a href={pagePath(lang, "about")} className="text-cream-muted/80 hover:text-cream">
+                {site.about.navLabel}
+              </a>
+            </li>
           </ul>
         </nav>
         <nav aria-label="Social Media">

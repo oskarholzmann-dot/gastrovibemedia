@@ -5,15 +5,15 @@ import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "cn";
 import { buttonVariants } from "@/components/ui/button";
-import { getSite } from "@/config/i18n";
-import type { Locale } from "@/config/i18n";
+import { getSite, pagePath, sectionPath } from "@/config/i18n";
+import type { Locale, PageKey } from "@/config/i18n";
 import { LanguageSwitch } from "./language-switch";
 
 export function Logo({ lang }: { lang: Locale }) {
   const site = getSite(lang);
 
   return (
-    <a href="#top" className="flex items-baseline gap-1.5 text-cream" aria-label={`${site.brand.name} – ${site.ui.toTop}`}>
+    <a href={sectionPath(lang, "top")} className="flex items-baseline gap-1.5 text-cream" aria-label={`${site.brand.name} – ${site.ui.toTop}`}>
       <span className="font-heading text-xl font-semibold sm:text-2xl">
         Gastro<span className="text-amber-gold">Vibe</span>
       </span>
@@ -22,7 +22,7 @@ export function Logo({ lang }: { lang: Locale }) {
   );
 }
 
-export function Header({ lang }: { lang: Locale }) {
+export function Header({ lang, page = "home" }: { lang: Locale; page?: PageKey }) {
   const site = getSite(lang);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -46,13 +46,20 @@ export function Header({ lang }: { lang: Locale }) {
         <Logo lang={lang} />
         <nav aria-label={site.ui.mainNav} className="ml-auto hidden items-center gap-7 lg:flex">
           {site.nav.map((item) => (
-            <a key={item.id} href={`#${item.id}`} className="text-sm font-medium text-cream-muted/80 transition-colors hover:text-cream">
+            <a key={item.id} href={sectionPath(lang, item.id)} className="text-sm font-medium text-cream-muted/80 transition-colors hover:text-cream">
               {item.label}
             </a>
           ))}
+          <a
+            href={pagePath(lang, "about")}
+            aria-current={page === "about" ? "page" : undefined}
+            className={cn("text-sm font-medium transition-colors hover:text-cream", page === "about" ? "text-cream" : "text-cream-muted/80")}
+          >
+            {site.about.navLabel}
+          </a>
         </nav>
-        <LanguageSwitch lang={lang} className="ml-auto lg:ml-0" />
-        <a href="#anfrage" className={cn(buttonVariants(), "hidden h-10 rounded-full px-5 font-semibold sm:inline-flex")}>
+        <LanguageSwitch lang={lang} page={page} className="ml-auto lg:ml-0" />
+        <a href={sectionPath(lang, "anfrage")} className={cn(buttonVariants(), "hidden h-10 rounded-full px-5 font-semibold sm:inline-flex")}>
           {site.hero.primaryCta}
         </a>
         <button
@@ -79,7 +86,7 @@ export function Header({ lang }: { lang: Locale }) {
               {site.nav.map((item) => (
                 <a
                   key={item.id}
-                  href={`#${item.id}`}
+                  href={sectionPath(lang, item.id)}
                   onClick={() => setIsMenuOpen(false)}
                   className="rounded-xl px-3 py-3 font-heading text-2xl text-cream hover:bg-white/5"
                 >
@@ -87,7 +94,14 @@ export function Header({ lang }: { lang: Locale }) {
                 </a>
               ))}
               <a
-                href="#anfrage"
+                href={pagePath(lang, "about")}
+                onClick={() => setIsMenuOpen(false)}
+                className="rounded-xl px-3 py-3 font-heading text-2xl text-cream hover:bg-white/5"
+              >
+                {site.about.navLabel}
+              </a>
+              <a
+                href={sectionPath(lang, "anfrage")}
                 onClick={() => setIsMenuOpen(false)}
                 className={cn(buttonVariants(), "mt-3 h-12 rounded-full text-base font-semibold")}
               >

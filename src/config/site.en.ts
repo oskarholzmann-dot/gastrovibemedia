@@ -256,6 +256,60 @@ export const siteEn: SiteContent = {
     },
   },
 
+  about: {
+    navLabel: "About us",
+    metaTitle: "About us — GastroVibe Media",
+    metaDescription: "Vuong Vo and Oskar Holzmann: two equal co-founders, photographers and the team behind GastroVibe Media.",
+    eyebrow: "About us",
+    title: "Two founders. One team. Content that brings in guests.",
+    intro:
+      "GastroVibe Media is run by Vuong Vo and Oskar Holzmann – two photographers building an agency as equal partners, where creativity and numbers belong together.",
+    photo: { ...de.about.photo, alt: "Founders Oskar Holzmann and Vuong Vo sitting arm in arm, smiling at the camera" },
+    storyTitle: "Why we exist",
+    story: [
+      "We both come from photography and work with restaurants, bars and event venues. What we see again and again: great food gets lost online when the content isn't right – and great content fizzles out when nobody measures what it achieves.",
+      "So we joined forces. Oskar makes sure your venue looks as good on Instagram, TikTok and Google as it tastes. Vuong makes sure that turns into measurably more enquiries, bookings and guests.",
+      "We are equal partners and make important decisions together. For you, that means one fixed contact per project, clear prices and agreements – and two founders who are behind the camera themselves.",
+    ],
+    foundersTitle: "The founders",
+    focusLabel: "Focus",
+    founders: [
+      {
+        ...de.about.founders[0],
+        role: "Co-founder · Photography & performance",
+        text: "Vuong is first and foremost a photographer. Beyond that, he is your first point of contact: he leads the initial consultation, finds out what will really move your venue forward and puts together the right package. Once we're live, he keeps an eye on campaigns, reach and enquiries and makes visible what your marketing actually delivers.",
+        focus: ["Photography", "Client acquisition & consulting", "Performance & campaigns", "Reporting & measurability"],
+      },
+      {
+        ...de.about.founders[1],
+        role: "Co-founder · Creative director",
+        text: "Oskar is the creative mind behind our content. He shoots photos and video and edits them himself, develops concepts, shot lists, marketing plans and strategies, and keeps the visual language consistent across every channel. He is responsible for fulfilment: every project reaches you on time and at the agreed quality.",
+        focus: ["Photo, video & editing", "Concept & content strategy", "Marketing plans", "Fulfilment & quality control"],
+      },
+    ],
+    valuesTitle: "How we work",
+    values: [
+      {
+        title: "Creative and measurable",
+        text: "Every image has a purpose. We plan content so that it looks great and shows up in bookings and guests.",
+      },
+      {
+        title: "Clear agreements",
+        text: "One fixed contact, transparent prices and a clearly defined scope – no hidden costs.",
+      },
+      {
+        title: "Straight from the founders",
+        text: "You work directly with the people who create your content. For larger productions, we bring in trusted freelancers.",
+      },
+    ],
+    family: "GastroVibe Media is part of Vibe Media – alongside WeddingVibe for weddings and ResortVibe for hotels & resorts.",
+    cta: {
+      title: "Let's get to know each other",
+      text: "Tell us about your venue – we'll get back to you within 24 hours.",
+      button: "Free initial consultation",
+    },
+  },
+
   footer: {
     tagline: "Social media & performance marketing for restaurants, hotels & event venues.",
   },

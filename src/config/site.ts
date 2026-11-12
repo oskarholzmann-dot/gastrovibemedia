@@ -356,6 +356,64 @@ export const site = {
     },
   },
 
+  /** Unterseite „Über uns“ (/ueber-uns bzw. /en/about). */
+  about: {
+    navLabel: "Über uns",
+    metaTitle: "Über uns — GastroVibe Media",
+    metaDescription: "Vuong Vo und Oskar Holzmann: zwei gleichberechtigte Gründer, Fotografen und das Team hinter GastroVibe Media.",
+    eyebrow: "Über uns",
+    title: "Zwei Gründer. Ein Team. Content, der Gäste bringt.",
+    intro:
+      "Hinter GastroVibe Media stehen Vuong Vo und Oskar Holzmann – zwei Fotografen, die als gleichberechtigte Partner eine Agentur aufbauen, in der Kreativität und Zahlen zusammengehören.",
+    photo: {
+      src: "/images/team-gruender.jpg",
+      alt: "Die Gründer Oskar Holzmann und Vuong Vo sitzen Arm in Arm nebeneinander und lächeln in die Kamera",
+    } satisfies Media,
+    storyTitle: "Warum es uns gibt",
+    story: [
+      "Wir kommen beide von der Fotografie und arbeiten mit Restaurants, Bars und Event-Locations. Was wir dabei immer wieder sehen: Gutes Essen geht online unter, wenn der Content nicht stimmt – und guter Content verpufft, wenn niemand misst, was er bringt.",
+      "Deshalb haben wir unsere Stärken zusammengelegt. Oskar sorgt dafür, dass dein Laden auf Instagram, TikTok und Google so gut aussieht, wie er schmeckt. Vuong sorgt dafür, dass daraus messbar mehr Anfragen, Reservierungen und Gäste werden.",
+      "Wir sind gleichberechtigte Partner und treffen wichtige Entscheidungen gemeinsam. Für dich heißt das: ein fester Ansprechpartner pro Projekt, klare Preise und Absprachen – und zwei Gründer, die selbst hinter der Kamera stehen.",
+    ],
+    foundersTitle: "Die Gründer",
+    focusLabel: "Schwerpunkte",
+    founders: [
+      {
+        name: "Vuong Vo",
+        role: "Co-Founder · Fotografie & Performance",
+        text: "Vuong steht in erster Linie als Fotograf hinter der Kamera. Darüber hinaus ist er dein erster Ansprechpartner: Er führt das Erstgespräch, findet heraus, was deinen Laden wirklich weiterbringt, und stellt das passende Paket zusammen. Nach dem Start behält er Kampagnen, Reichweite und Anfragen im Blick und macht sichtbar, was dein Marketing tatsächlich bringt.",
+        focus: ["Fotografie", "Kundengewinnung & Beratung", "Performance & Kampagnen", "Reporting & Messbarkeit"],
+      },
+      {
+        name: "Oskar Holzmann",
+        role: "Co-Founder · Creative Director",
+        text: "Oskar ist der kreative Kopf hinter unserem Content. Er fotografiert, filmt und schneidet selbst, entwickelt Konzepte, Shotlists, Marketingpläne und Strategien und hält die Bildsprache über alle Kanäle stimmig. Er verantwortet das Fulfillment: Jedes Projekt kommt pünktlich und in der vereinbarten Qualität bei dir an.",
+        focus: ["Foto, Video & Schnitt", "Konzept & Content-Strategie", "Marketingpläne", "Fulfillment & Qualitätskontrolle"],
+      },
+    ],
+    valuesTitle: "So arbeiten wir",
+    values: [
+      {
+        title: "Kreativ und messbar",
+        text: "Jedes Bild hat ein Ziel. Wir planen Content so, dass er gut aussieht und sich in Reservierungen und Gästen bemerkbar macht.",
+      },
+      {
+        title: "Klare Absprachen",
+        text: "Ein fester Ansprechpartner, transparente Preise und ein klar definierter Leistungsumfang – ohne versteckte Kosten.",
+      },
+      {
+        title: "Direkt mit den Gründern",
+        text: "Du arbeitest direkt mit den Menschen, die deinen Content machen. Für größere Produktionen holen wir erprobte Freelancer dazu.",
+      },
+    ],
+    family: "GastroVibe Media ist Teil von Vibe Media – zusammen mit WeddingVibe für Hochzeiten und ResortVibe für Hotels & Resorts.",
+    cta: {
+      title: "Lass uns kennenlernen",
+      text: "Erzähl uns von deinem Laden – wir melden uns innerhalb von 24 Stunden.",
+      button: "Kostenloses Erstgespräch",
+    },
+  },
+
   footer: {
     tagline: "Social Media & Performance Marketing für Gastronomie, Hotellerie & Event-Locations.",
   },

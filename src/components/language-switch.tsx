@@ -1,6 +1,6 @@
 import { cn } from "cn";
-import { getSite, localePath } from "@/config/i18n";
-import type { Locale } from "@/config/i18n";
+import { getSite, pagePath } from "@/config/i18n";
+import type { Locale, PageKey } from "@/config/i18n";
 
 function UnionJack() {
   return (
@@ -28,12 +28,12 @@ function GermanFlag() {
 }
 
 /** Wechselt zur jeweils anderen Sprache: auf Deutsch zeigt er die englische Flagge und umgekehrt. */
-export function LanguageSwitch({ lang, className }: { lang: Locale; className?: string }) {
+export function LanguageSwitch({ lang, page = "home", className }: { lang: Locale; page?: PageKey; className?: string }) {
   const target: Locale = lang === "de" ? "en" : "de";
 
   return (
     <a
-      href={localePath(target)}
+      href={pagePath(target, page)}
       hrefLang={target}
       lang={target}
       aria-label={getSite(lang).ui.switchLanguage}
